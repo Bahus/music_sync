@@ -56,3 +56,8 @@ target/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Idea
+.idea/
+*.iml
+*.db
