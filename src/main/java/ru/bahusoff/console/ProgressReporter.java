@@ -7,6 +7,9 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * Draws progress bar for multiple tasks
+ *
+ * All console related methods must be synchronized to work properly and
+ * avoid graphical glitches
  */
 public class ProgressReporter {
     private static ProgressReporter instance = null;
@@ -39,7 +42,7 @@ public class ProgressReporter {
         return instance;
     }
 
-    private void init() {
+    private synchronized void init() {
 
         Console.println(
             Ansi.ansi()
@@ -52,7 +55,7 @@ public class ProgressReporter {
     }
 
     public void drawProgress(Reportable task, int percent) {
-        assert (percent >=0 && percent <=100) : "Percent should be between 0 and 100";
+        assert (percent >= 0 && percent <= 100) : "Percent should be between 0 and 100";
 
         TaskInfo taskInfo = getTaskInfo(task);
         byte current_position = getPosition(percent);
@@ -67,7 +70,7 @@ public class ProgressReporter {
         drawProgressBar(taskInfo, getProgressBar(percent));
     }
 
-    private void drawProgressBar(TaskInfo taskInfo, String progress) {
+    private synchronized void drawProgressBar(TaskInfo taskInfo, String progress) {
         int offset = taskInfo.getNumber();
 
         Console.print(Ansi.ansi().restorCursorPosition());
