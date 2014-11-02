@@ -10,4 +10,4 @@ It's able to download 10 latest audios from your vk.com favorites.
 
 * Screenshot
 
-![Console screen shot](../music_sync/screenshots/screenshots/music_sync_low.png?raw=true "Console screenshot")
+![Console screen shot](../screenshots/screenshots/music_sync_low.png?raw=true "Console screenshot")
