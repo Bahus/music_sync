@@ -47,7 +47,7 @@ public class ProgressReporter {
         Console.println(
             Ansi.ansi()
                 .cursorLeft(1000)
-                .format("Downloading %d tracks.", capacity)
+                .format("Synchronizing %d track(s).", capacity)
         );
 
         Console.print(Ansi.ansi().saveCursorPosition());

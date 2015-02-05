@@ -5,8 +5,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import ru.bahusoff.storage.AudioTrack;
-import ru.bahusoff.utils.LoggerFactory;
+import ru.bahusoff.storage.UserProperties;
 import ru.bahusoff.storage.UserSettings;
+import ru.bahusoff.utils.LoggerFactory;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.Map;
 public class VkApiClient {
     private static final Logger LOG = LoggerFactory.getLogger(VkApiClient.class);
 
-    private UserSettings userSettings;
+    private UserProperties userSettings;
 
     private static final int APP_ID = 4447251;
     private static final String API_VERSION = "5.22";
@@ -37,7 +38,7 @@ public class VkApiClient {
     private static final String API_USER_URL = "https://api.vk.com/method/users.get?access_token=%s";
     private static final String API_URL = "https://api.vk.com/method/";
 
-    public VkApiClient(UserSettings userSettings) {
+    public VkApiClient(UserProperties userSettings) {
         this.userSettings = userSettings;
     }
 
@@ -136,7 +137,7 @@ public class VkApiClient {
         return (Long)doApiRequest("audio.getCount", params);
     }
 
-    public static boolean updateUserSettings(UserSettings settings) throws Exception {
+    public static boolean updateUserSettings(UserProperties settings) throws Exception {
         VkApiClient client = new VkApiClient(settings);
 
         JSONArray json_array = (JSONArray)client.doApiRequest("users.get");
@@ -152,4 +153,7 @@ public class VkApiClient {
         return false;
     }
 
+    public static boolean updateUserSettings(UserSettings userSettings) {
+        return false;
+    }
 }

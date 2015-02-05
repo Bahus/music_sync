@@ -56,6 +56,13 @@ public class DownloadTask implements Reportable {
         ProgressReporter reporter = ProgressReporter.getInstance();
         URLConnection connection = trackUrl.openConnection();
 
+        // already downloaded
+        if (trackFile.exists()) {
+            LOG.debug("Track is already downloaded: {}", trackFile.getAbsolutePath());
+            reporter.setTaskCompleted(this);
+            return;
+        }
+
         int possibleSize = Integer.parseInt(connection.getHeaderField("Content-Length"));
 
         try {
